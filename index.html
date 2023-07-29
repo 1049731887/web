@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.4"> <!-- 为移动设备添加视口 -->
+    <title>嘿嘿嘿 ٩(๑′0`๑)۶</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".myButton").click(function () {
+                var clickedTime = new Date().toISOString();
+                $.ajax({
+                    url: "http://10.144.153.122:3000/logClick",
+                    type: "POST",
+                    data: JSON.stringify({ clickedTime: clickedTime }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data, status) {
+                        console.log("数据: " + data + "\n状态: " + status);
+                    }
+                });
+            });
+            // 记录访客进入时间
+            $(document).ready(function () {
+                var entryTime = new Date().toISOString();
+                $.ajax({
+                    url: "http://10.144.153.122:3000/logEntry",
+                    type: "POST",
+                    data: JSON.stringify({ entryTime: entryTime }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data, status) {
+                        console.log("数据: " + data + "\n状态: " + status);
+                    }
+                });
+            });
+        });
+    </script>
+    <style>
+        @media (min-aspect-ratio: 1.2) {
+            .center {
+                flex-direction: row;
+            }
+            .myButton {
+                margin-right: 10px;
+            }
+        }
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+            /* 添加深色模式背景颜色 */
+            color: #fff;
+            /* 添加深色模式文本颜色 */
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            /* 为移动设备更改高度 */
+            width: 100%;
+            /* 为移动设备更改宽度 */
+        }
+
+        .myButton {
+            font-size: 2em;
+            /* 为移动设备更改字体大小 */
+            padding: 1em 2em;
+            /* 为移动设备更改按钮大小 */
+            background-color: #4CAF50;
+            /* 更改按钮颜色 */
+            color: white;
+            /* 更改文本颜色 */
+            border: none;
+            /* 移除边框 */
+            border-radius: 5px;
+            /* 添加边框半径 */
+            cursor: pointer;
+            /* 鼠标悬停时添加指针光标 */
+            font-family: 'katong';
+        }
+
+        .myButton:hover {
+            background-color: #45a049;
+            /* 鼠标悬停时更改按钮颜色 */
+        }
+
+        body {
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .image-gallery img {
+            margin: 10px;
+            cursor: pointer;
+            max-width: calc(100vw - 40px);
+            /* 为移动设备更改最大宽度 */
+        }
+
+        .info-container {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+        }
+        @font-face {
+            font-family: 'katong';
+            src: url('fonts/katong.ttf');
+        }
+    </style>
+</head>
+
+<body>
+    <div class="center">
+        <a href="photo.html" style="position: absolute; bottom: 30%; "><button class="myButton"
+                style="font-size: 2em;">点击进入</button></a>
+        <a href="photosnew.html" style="position: absolute; bottom: 10%;  "><button class="myButton"
+                style="font-size: 2em;">测试进入</button></a>
+    </div>
+</body>
+
+
+
+</html>
