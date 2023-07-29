@@ -1,0 +1,25 @@
+<iframe id="myIframe" style="width:1000px; height:1000px"></iframe>
+
+<script>
+    var iframe = document.getElementById("myIframe");
+    var url = "http://www.yuw10497.dynv6.net/photo.html";
+
+    // 使用 AJAX 请求检测网站是否可访问
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                // 网站可访问，显示 iframe
+                iframe.src = url;
+            } else {
+                // 网站不可访问，显示错误消息
+                iframe.style.display = "none";
+                var errorMessage = document.createElement("p");
+                errorMessage.textContent = "无法加载网站内容。";
+                document.body.appendChild(errorMessage);
+            }
+        }
+    };
+    xhr.send();
+</script>
