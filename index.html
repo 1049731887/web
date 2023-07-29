@@ -123,10 +123,52 @@
             font-family: 'katong';
             src: url('fonts/katong.ttf');
         }
+        .image-gallery img {
+            width: 0px;
+        }
     </style>
 </head>
 
 <body>
+	<div class="image-gallery">
+        <!-- 图片展示 -->
+        <script>
+            var imageGallery = document.querySelector(".image-gallery");
+            var numImages = 3;
+
+            for (var i = 1; i <= numImages; i++) {
+                var src = "img/p" + i + ".jpg";
+
+                var img = document.createElement("img");
+                img.src = src;
+                img.style.display = "block";
+                img.style.marginLeft = "auto";
+                img.style.marginRight = "auto";
+
+                // 为每个图片中间添加20px的间隔
+                img.style.marginTop = "20px";
+
+                imageGallery.appendChild(img);
+            }
+        </script>
+        <script>
+            var imageGallery = document.querySelector(".image-gallery");
+            var numImages = 19;
+
+            for (var i = 0; i <= numImages; i++) {
+                var src = "img/白露/p" + i + ".jpg";
+
+                var img = document.createElement("img");
+                img.src = src;
+                img.style.display = "block";
+                img.style.marginLeft = "auto";
+                img.style.marginRight = "auto";
+                // 为每个图片中间添加20px的间隔
+                img.style.marginTop = "20px";
+
+                imageGallery.appendChild(img);
+            }
+        </script>
     <div class="center">
         <a href="photo.html" style="position: absolute; bottom: 30%; "><button class="myButton"
                 style="font-size: 2em;">点击进入</button></a>
