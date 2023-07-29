@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>嘿嘿嘿 ٩(๑′0`๑)۶（测试页）</title>
+    <title>1嘿嘿嘿 ٩(๑′0`๑)۶（测试页）</title>
     <link rel="stylesheet" href="style.css">
     <style>
         /* 为图片放大和背景变暗添加样式 */
@@ -203,6 +203,7 @@
 
     <script>
         document.body.style.overflow = 'hidden';
+
         window.onload = function() {
             var loader = document.querySelector('.loader');
             loader.style.transition = 'opacity 1s ease-out'; // 设置过渡效果
@@ -214,6 +215,16 @@
             });
             document.body.style.overflow = 'auto';
         };
+		// 等待10s还未加载完自动去掉加载动画
+        setTimeout(function() {
+            var loader = document.querySelector('.loader');
+            loader.style.transition = 'opacity 1s ease-out';
+            loader.style.opacity = '0';
+            loader.addEventListener('transitionend', function() {
+                loader.style.display = 'none';
+            });
+            document.body.style.overflow = 'auto';
+        }, 10000);
         
         var images = document.querySelectorAll('.image-gallery img');
         var loadedImagesCount = 0;
