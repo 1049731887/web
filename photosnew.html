@@ -7,18 +7,16 @@
     <style>
         /* 为图片放大和背景变暗添加样式 */
         .image-gallery img.active {
-            position: fixed;
-            top: -20px; /* 修改：点击图片后，去除点击图片的顶部20像素间隔 */
-            left: 0;
+            top: 0; /* 修改：点击图片后，去除点击图片的顶部20像素间隔 */
             width: 100%;
             height: 100%;
-            transition: transform 0.5s; /* 添加过渡动画 */
+            transition: width .2s;
         }
         .image-gallery img {
             width: calc(60%);
             object-fit: contain; /* 图片按比例缩放*/
-            margin-left: auto; /* 新增：使元素水平居中 */
-            margin-right: auto; /* 新增：使元素水平居中 */
+            margin-left: auto;
+            margin-right: auto;
         }
         .dark-background {
             position: fixed;
@@ -162,38 +160,33 @@
         <script>
             var imageGallery = document.querySelector('.image-gallery');
             var numImages = 3;
-
+        
             for (var i = 1; i <= numImages; i++) {
                 var src = "img/p" + i + ".jpg";
-
+        
                 var img = document.createElement('img');
                 img.src = src;
                 img.style.display = 'block';
-                img.style.marginLeft = 'auto';
-                img.style.marginRight = 'auto';
-
-                // 为每个图片中间添加20px的间隔
-                img.style.marginTop = '20px';
-
+        
                 imageGallery.appendChild(img);
+
+                var br = document.createElement('br');
+                imageGallery.appendChild(br);
             }
-        </script>
-        <script>
-            var imageGallery = document.querySelector('.image-gallery');
-            var numImages = 19;
-
-            for (var i = 0; i <= numImages; i++) {
+        
+            var numImages2 = 0;
+        
+            for (var i = 0; i <= numImages2; i++) {
                 var src = "img/白露/p" + i + ".jpg";
-
+        
                 var img = document.createElement('img');
                 img.src = src;
                 img.style.display = 'block';
-                img.style.marginLeft = 'auto';
-                img.style.marginRight = 'auto';
-                // 为每个图片中间添加20px的间隔
-                img.style.marginTop = '20px';
-
+        
                 imageGallery.appendChild(img);
+
+                var br = document.createElement('br');
+                imageGallery.appendChild(br);
             }
         </script>
 
@@ -215,7 +208,7 @@
             });
             document.body.style.overflow = 'auto';
         };
-		// 等待10s还未加载完自动去掉加载动画
+        // 等待10s还未加载完自动去掉加载动画
         setTimeout(function() {
             var loader = document.querySelector('.loader');
             loader.style.transition = 'opacity 1s ease-out';
@@ -252,19 +245,16 @@
                 // 隐藏其他图片和标题
                 images.forEach(function(otherImg) {
                     if (otherImg !== img) {
-                        otherImg.style.display = 'none';
+                        otherImg.style.opacity = '0';
+                        otherImg.style.transition = 'opacity 1s';
                     }
                 });
-                title.style.display = 'none';
-
-                // 显示暗背景
+                title.style.opacity = '0';
+                title.style.transition = 'opacity 1s';
+                // 显示点击蒙版
                 document.querySelector('.dark-background').style.display = 'block';
-
                 // 使点击的图片变为活动状态
                 img.classList.add('active');
-
-                // 改变transform属性，从其原始位置缩放图片
-                img.style.transform = 'scale(1)';
             });
 
         });
@@ -273,12 +263,12 @@
         document.querySelector('.dark-background').addEventListener('click', function() {
             // 显示其他图片和标题
             images.forEach(function(img) {
-                img.style.display = 'block';
-                img.style.transform = 'none'; /* 重置transform属性 */
-                img.style.marginTop = '20px'; /* 点击背景后恢复顶部20像素间隔 */
+                if (!img.classList.contains('active')) {
+                    img.style.opacity = '1';
+                    img.style.transition = 'opacity 0.2s';
+                }
             });
-            title.style.display = 'block';
-
+            
             // 隐藏暗背景
             this.style.display = 'none';
 
@@ -286,11 +276,14 @@
             images.forEach(function(img) {
                 img.classList.remove('active');
             });
-
+            
             // 恢复滚动位置
             window.scrollTo(0, scrollPosition);
+            title.style.opacity = '1';
+            title.style.transition = 'opacity 0.2s';
         });
     </script>
+
 </body>
 </html>
 
