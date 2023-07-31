@@ -205,9 +205,7 @@
         document.body.style.overflow = 'hidden';
 
         // 加载动画退出函数
-        var flag_yujiazai=0;
         function loaderout() {
-
             // 预加载图片放大缩小
             var images = document.querySelectorAll('.image-gallery img');
             images.forEach(function(img) {
@@ -229,18 +227,26 @@
                     loader.style.display = 'none';
                 });
                 document.body.style.overflow = 'auto';
-            }, 3000);
-
+            }, 5000);
         }
 
+        var loaderExecuted = false;
         window.onload = function() {
-            loaderout();
+            if (!loaderExecuted) {
+                loaderout();
+                loaderExecuted = true;
+            }
         };
-        // 等待10s还未加载完自动去掉加载动画
+
+        // 等待3s还未加载完自动去掉加载动画
         setTimeout(function() {
-            loaderout();
-        }, 10000);
+            if (!loaderExecuted) {
+                loaderout();
+                loaderExecuted = true;
+            }
+        }, 3000);// 方便测试test
         
+
         var images = document.querySelectorAll('.image-gallery img');
         var loadedImagesCount = 0;
         

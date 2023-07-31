@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>嘿嘿嘿 ٩(๑′0`๑)۶（测试页）放大缩小</title>
+    <title>嘿嘿嘿 ٩(๑′0`๑)۶（测试页）fix</title>
     <link rel="stylesheet" href="style.css">
     <style>
         /* 为图片放大和背景变暗添加样式 */
@@ -205,9 +205,7 @@
         document.body.style.overflow = 'hidden';
 
         // 加载动画退出函数
-        var flag_yujiazai=0;
         function loaderout() {
-
             // 预加载图片放大缩小
             var images = document.querySelectorAll('.image-gallery img');
             images.forEach(function(img) {
@@ -230,18 +228,25 @@
                 });
                 document.body.style.overflow = 'auto';
             }, 5000);
-
         }
 
+        var loaderExecuted = false;
         window.onload = function() {
-            loaderout();
+            if (!loaderExecuted) {
+                loaderout();
+                loaderExecuted = true;
+            }
         };
 
         // 等待3s还未加载完自动去掉加载动画
         setTimeout(function() {
-            loaderout();
+            if (!loaderExecuted) {
+                loaderout();
+                loaderExecuted = true;
+            }
         }, 3000);// 方便测试test
         
+
         var images = document.querySelectorAll('.image-gallery img');
         var loadedImagesCount = 0;
         
