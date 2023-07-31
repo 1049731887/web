@@ -102,7 +102,7 @@ html,body{
     background: #f7f459;
 	overflow: hidden;
     filter: blur(50px);
-    transition: filter .2s;
+    transition: filter .5s;
 }
 .foot {
 	min-height: 10%;

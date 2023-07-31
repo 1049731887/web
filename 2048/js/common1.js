@@ -141,7 +141,8 @@ function IsGameOver() {
 		setTimeout(function () {
 			if (a !== 1) {
 				var a = 1;
-				alert("Game Over!\n你一共摸了小纳纳"+monum+"次");
+				var message = "Game over!\n你一共摸了小纳纳" + monum + "次";
+            	alert(message);
 			}
 		}, 1000);
 	}
