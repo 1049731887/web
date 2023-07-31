@@ -56,7 +56,6 @@
     <div class="dark-background" style="display: none;"></div>
     <script>
         document.body.style.overflow = 'hidden';
-        var flag_yujiazai=0;
         function loaderout() {
             var images = document.querySelectorAll('.image-gallery img');
             images.forEach(function(img) {
@@ -75,14 +74,21 @@
                     loader.style.display = 'none';
                 });
                 document.body.style.overflow = 'auto';
-            }, 3000);
+            }, 5000);
         }
+        var loaderExecuted = false;
         window.onload = function() {
-            loaderout();
+            if (!loaderExecuted) {
+                loaderout();
+                loaderExecuted = true;
+            }
         };
         setTimeout(function() {
-            loaderout();
-        }, 10000);
+            if (!loaderExecuted) {
+                loaderout();
+                loaderExecuted = true;
+            }
+        }, 3000);
         var images = document.querySelectorAll('.image-gallery img');
         var loadedImagesCount = 0;
         images.forEach(function(img) {
