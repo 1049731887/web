@@ -24,7 +24,7 @@
 /* 设置页面的文本字体 */
 @font-face {
     font-family: 'katong';
-    src: url('.../fonts/katong.ttf');
+    src: url('../../fonts/katong.ttf');
 }
 body {
     font-family: 'katong';
