@@ -2,6 +2,14 @@
 <html lang="zh-CN">
 
 <head>
+	<script>
+
+		var mes1 = "Game over!\n你一共摸了小纳纳";
+		var mes2 = "次";
+		var nd = 40;
+		var path_img = "../img/白露/p1.png";
+		
+	</script>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,user-scalable=no" />
 	<title>小游戏 · 2048</title>
@@ -12,13 +20,12 @@
 	<script src="js/main1.js"></script>
 	<!-- 设置图片清晰度 -->
 	<script>
-		var mes1="Game over!\n你一共摸了小纳纳";
-		var mes2="次";
-		setInterval(function() {
-			var TMD=score/40;
-			TMD=50-TMD;
-			if(TMD<0){
-				TMD=0;
+
+		setInterval(function () {
+			var TMD = score / nd;
+			TMD = 50 - TMD;
+			if (TMD < 0) {
+				TMD = 0;
 			}
 			$("#image").css("filter", "blur(" + TMD + "px)");
 		}, 2000);
@@ -28,6 +35,7 @@
 			font-family: 'katong';
 			src: url('../fonts/katong.ttf');
 		}
+
 		*,
 		*::before,
 		*::after {
@@ -75,9 +83,12 @@
 	<br>
 	<div class="foot">
 		<div id="image" class="rounded-image">
-			<img alt="图片加载失败，请启动zerozier哦~" src="../img/白露/p1.png" style="width: 100%; display: block;">
+			<img id=pic alt="图片加载失败，请启动zerozier哦~" style="width: 100%; display: block;">
 		</div>
 	</div>
+	<script>
+		document.getElementById("pic").src = path_img;
+	</script>
 </body>
 
 </html>
