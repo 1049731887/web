@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>嘿嘿嘿 ٩(๑′0`๑)۶</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background-color: rgba(8, 16, 29, 0.918);">
+    <div class="loader">
+        <div class="loader-inner" style="transform: scale(2);">
+
+            <div class="loader-line-wrap">
+                <div class="loader-line"></div>
+            </div>
+            <div class="loader-line-wrap">
+                <div class="loader-line"></div>
+            </div>
+            <div class="loader-line-wrap">
+                <div class="loader-line"></div>
+            </div>
+            <div class="loader-line-wrap">
+                <div class="loader-line"></div>
+            </div>
+            <div class="loader-line-wrap">
+                <div class="loader-line"></div>
+            </div>
+        </div>
+    </div>
+    
+    <h1 id="title" style="color: rgb(91, 100, 105); text-align: center; font-size: 400%;">点击图片以放大</h1>
+
+    <div class="image-gallery">
+        <!-- 图片展示 -->
+        <script>
+
+            var imageGallery = document.querySelector('.image-gallery');
+            var numImages = 3;
+        
+            for (var i = 1; i <= numImages; i++) {
+                var src = "../img/p" + i + ".jpg";
+        
+                var img = document.createElement('img');
+                img.src = src;
+                img.style.display = 'block';
+        
+                imageGallery.appendChild(img);
+
+                var br = document.createElement('br');
+                imageGallery.appendChild(br);
+            }
+        
+            var numImages2 = 0;
+        
+            for (var i = 0; i <= numImages2; i++) {
+                var src = "../img/白露/p" + i + ".jpg";
+        
+                var img = document.createElement('img');
+                img.src = src;
+                img.style.display = 'block';
+        
+                imageGallery.appendChild(img);
+
+                var br = document.createElement('br');
+                imageGallery.appendChild(br);
+            }
+
+            //预加载放大缩小动画，使页面更流畅
+            var lineImage = document.querySelector('img[alt="line"]');
+            lineImage.classList.add('active');
+
+            
+        </script>
+
+        <!-- 根据需要添加更多图片 -->
+    </div>
+    <div class="dark-background" style="display: none;"></div>
+
+    <script>
+        document.body.style.overflow = 'hidden';
+
+        // 加载动画退出函数
+        var flag_yujiazai=0;
+        function loaderout() {
+
+            // 预加载图片放大缩小
+            var images = document.querySelectorAll('.image-gallery img');
+            images.forEach(function(img) {
+                img.classList.add('active');
+            });
+            setTimeout(function() {
+                images.forEach(function(img) {
+                    img.classList.remove('active');
+                });
+            }, 1000);
+
+            setTimeout(function() {
+                var loader = document.querySelector('.loader');
+                loader.style.transition = 'opacity 1s ease-out'; // 设置过渡效果
+                loader.style.opacity = '0'; // 将透明度设置为0
+            
+                // 当过渡效果结束后，隐藏加载动画
+                loader.addEventListener('transitionend', function() {
+                    loader.style.display = 'none';
+                });
+                document.body.style.overflow = 'auto';
+            }, 3000);
+
+        }
+
+        window.onload = function() {
+            loaderout();
+        };
+        // 等待10s还未加载完自动去掉加载动画
+        setTimeout(function() {
+            loaderout();
+        }, 10000);
+        
+        var images = document.querySelectorAll('.image-gallery img');
+        var loadedImagesCount = 0;
+        
+        images.forEach(function(img) {
+            img.onload = function() {
+                loadedImagesCount++;
+                if (loadedImagesCount === images.length) {
+                    document.body.style.opacity = "1";
+                }
+            };
+        });
+
+        // 获取所有图片和标题
+        var images = document.querySelectorAll('.image-gallery img');
+        var title = document.getElementById('title');
+        var scrollPosition = 0; // 新增：用于保存滚动位置
+
+        // 为每个图片添加点击事件监听器
+        images.forEach(function(img) {
+            img.addEventListener('click', function() {
+                // 保存滚动位置
+                scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+                // 隐藏其他图片和标题
+                // images.forEach(function(otherImg) {
+                //     if (otherImg !== img) {
+                //         otherImg.style.opacity = '0';
+                //         otherImg.style.transition = 'opacity 1s';
+                //     }
+                // });
+                title.style.opacity = '0';
+                title.style.transition = 'opacity 1s';
+                // 显示点击蒙版
+                document.querySelector('.dark-background').style.display = 'block';
+                // 使点击的图片变为活动状态
+                img.classList.add('active');
+            });
+
+        });
+
+        // 为暗背景添加点击事件监听器，以反转上述操作
+        document.querySelector('.dark-background').addEventListener('click', function() {
+            // 显示其他图片和标题
+            // images.forEach(function(img) {
+            //     if (!img.classList.contains('active')) {
+            //         img.style.opacity = '1';
+            //         img.style.transition = 'opacity 0.2s';
+            //     }
+            // });
+            
+            // 隐藏暗背景
+            this.style.display = 'none';
+
+            // 从所有图片中移除活动类
+            images.forEach(function(img) {
+                img.classList.remove('active');
+            });
+            
+            // 恢复滚动位置
+            // window.scrollTo(0, scrollPosition);
+            title.style.opacity = '1';
+            title.style.transition = 'opacity 0.2s';
+        });
+    </script>
+
+</body>
+</html>
+
