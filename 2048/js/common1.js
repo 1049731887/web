@@ -121,8 +121,10 @@ function noBlockVertical(col,row1,row2,nums){
 	return true;
 }
 //更新分数
+var monum=0;
 function updateScore(score){
 	$('#score').text(score);
+	monum+=1;
 }
 //判断是否不能移动
 function noMove(nums){
@@ -139,7 +141,7 @@ function IsGameOver() {
 		setTimeout(function () {
 			if (a !== 1) {
 				var a = 1;
-				alert("Game Over!");
+				alert("Game Over!\n你一共摸了小纳纳"+monum+"次");
 			}
 		}, 1000);
 	}
