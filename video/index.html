@@ -21,6 +21,15 @@
             cursor: pointer;
         }
     </style>
+	<script>
+		var _hmt = _hmt || [];
+		(function() {
+		var hm = document.createElement("script");
+		hm.src = "https://hm.baidu.com/hm.js?8cbd7ad681af72b48b3f8c490b4e6b02";
+		var s = document.getElementsByTagName("script")[0]; 
+		s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
 </head>
 <body>
     <div id="buttonContainer">
@@ -28,6 +37,31 @@
     </div>
 
     <script>
+        // 获取视频ID
+        var id = window.location.search.split('?')[1];
+        var id = parseInt(id) + 1000;
+        
+        if(id>1000){
+                        // 创建XMLHttpRequest对象
+            var xhr = new XMLHttpRequest();
+            // 发送GET请求，获取视频列表数据
+            xhr.open('GET', '../../res/list.json', true);
+            xhr.onreadystatechange = function() {
+                // 当请求完成且响应状态为200时
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // 解析响应数据
+                    var data = JSON.parse(xhr.responseText);
+                    // 根据视频ID获取视频名称
+                    var vname = data[id];
+                    window.location.href = "//bilibili.com/"+vname
+                }
+            };
+            // 发送请求
+            xhr.send();
+
+            // window.location.href = url;
+        }
+
         // 使用fetch方法读取JSON数据
         fetch('../res/list.json')
             .then(response => response.json())
@@ -44,9 +78,9 @@
                     const btn = document.createElement('button');
                     btn.textContent = name;
 
-                    // 添加点击事件，当按钮被点击时跳转到123.com/video?play=1（或其他数字）
+                    // 添加点击事件，当按钮被点击时跳转
                     btn.addEventListener('click', () => {
-                        const url = `http://10.144.153.122/video?play=${id}`;
+                        const url = `?${id}`;
                         window.location.href = url;
                     });
 

@@ -25,9 +25,12 @@ if __name__ == "__main__":
 
     # 构建带编号的字典
     video_dict = {idx: folder for idx, folder in enumerate(video_folders, start=1)}
-
+    BV_dict = {idx + 1000: "BV" for idx, folder in enumerate(video_folders, start=1)}
     # 将结果写入 list.json 文件
     with open("list.json", "w") as json_file:
-        json.dump(video_dict, json_file, indent=4)
+        json.dump({**video_dict, **BV_dict}, json_file, indent=4)
+
+
 
     input("按下回车键继续...")
+
