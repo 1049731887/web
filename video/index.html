@@ -45,7 +45,7 @@
             // 创建XMLHttpRequest对象
             var xhr = new XMLHttpRequest();
             // 发送GET请求，获取视频列表数据
-            xhr.open('GET', '../../res/list.json', true);
+            xhr.open('GET', '../res/list.json', true);
             xhr.onreadystatechange = function() {
                 // 当请求完成且响应状态为200时
                 if (xhr.readyState === 4 && xhr.status === 200) {
