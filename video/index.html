@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,12 +9,14 @@
         html {
             background-color: #333;
         }
+
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 20px;
             background-color: #333;
         }
+
         button {
             padding: 10px 20px;
             margin: 5px;
@@ -24,16 +27,17 @@
             cursor: pointer;
         }
     </style>
-	<script>
-		var _hmt = _hmt || [];
-		(function() {
-		var hm = document.createElement("script");
-		hm.src = "https://hm.baidu.com/hm.js?8cbd7ad681af72b48b3f8c490b4e6b02";
-		var s = document.getElementsByTagName("script")[0]; 
-		s.parentNode.insertBefore(hm, s);
-		})();
-	</script>
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?8cbd7ad681af72b48b3f8c490b4e6b02";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
 </head>
+
 <body>
     <div id="buttonContainer">
         <!-- 这里将动态生成按钮列表 -->
@@ -44,19 +48,19 @@
         var id = window.location.search.split('?')[1];
         var id = parseInt(id) + 1000;
 
-        if(id>1000){
+        if (id > 1000) {
             // 创建XMLHttpRequest对象
             var xhr = new XMLHttpRequest();
             // 发送GET请求，获取视频列表数据
             xhr.open('GET', '../res/list.json', true);
-            xhr.onreadystatechange = function() {
+            xhr.onreadystatechange = function () {
                 // 当请求完成且响应状态为200时
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     // 解析响应数据
                     var data = JSON.parse(xhr.responseText);
                     // 根据视频ID获取视频名称
                     var vname = data[id];
-                    window.location.href = "//bilibili.com/video/"+vname
+                    window.location.href = "//bilibili.com/video/" + vname
                 }
             };
             // 发送请求
@@ -74,29 +78,30 @@
                 const buttonContainer = document.getElementById('buttonContainer');
 
                 // 如果id大于1000，则不创建按钮
-                    // 循环遍历按钮列表，为每个按钮创建HTML元素
-                    buttons.forEach(([id, name]) => {
-                        // 创建按钮元素
-                        const btn = document.createElement('button');
-                        btn.textContent = name;
+                // 循环遍历按钮列表，为每个按钮创建HTML元素
+                buttons.forEach(([id, name]) => {
+                    // 创建按钮元素
+                    const btn = document.createElement('button');
+                    btn.textContent = name;
 
-                        // 添加点击事件，当按钮被点击时跳转
-                        btn.addEventListener('click', () => {
-                            const url = `?${id}`;
-                            window.location.href = url;
-                        });
-                        if (id <= 1000) {
+                    // 添加点击事件，当按钮被点击时跳转
+                    btn.addEventListener('click', () => {
+                        const url = `?${id}`;
+                        window.location.href = url;
+                    });
+                    if (id <= 1000) {
                         // 将按钮添加到容器中
                         buttonContainer.appendChild(btn);
                         // 添加换行元素
                         const br = document.createElement('br');
                         buttonContainer.appendChild(br);
-                        }
-                    });
+                    }
+                });
             })
             .catch(error => {
                 console.error('Error fetching ../res/list.json:', error);
             });
     </script>
 </body>
+
 </html>
